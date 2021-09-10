@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Sdx.Demo.Invoice.Application;
+using Sdx.Demo.Invoice.Infrastructure.Persistence;
 
 namespace Sdx.Demo.Invoice.API
 {
@@ -26,6 +28,8 @@ namespace Sdx.Demo.Invoice.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplication(Configuration);
+            services.AddInfrastructure(Configuration);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
