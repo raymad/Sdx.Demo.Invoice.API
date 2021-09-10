@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sdx.Demo.Invoice.Application\Sdx.Demo.Invoice.Application.csproj" />
+    <ProjectReference Include="..\Sdx.Demo.Invoice.Domain\Sdx.Demo.Invoice.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
