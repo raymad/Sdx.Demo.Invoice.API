@@ -20,12 +20,12 @@ namespace Sdx.Demo.Invoice.API
             Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(config).CreateLogger();
             try
             {
-                Log.Information("Application Starting.##############3");
+                Log.Information("Application Starting.");
                 CreateHostBuilder(args).Build().Run();
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "The Application failed to start.######333");
+                Log.Fatal(ex, "The Application failed to start.");
             }
             finally
             {

@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.Reflection;
+using System.Text;
 
 namespace Sdx.Demo.Invoice.API
 {
@@ -42,25 +43,28 @@ namespace Sdx.Demo.Invoice.API
             services.AddCors(options =>
             {
                 options.AddPolicy(name: AllowSpecificOrigins,
-                    builder =>
-                    {
-                        builder.WithOrigins("*");
-                    });
+                    builder => { builder.WithOrigins("*"); });
             });
 
+            // Adding Authentication
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(o =>
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
             {
-                o.Authority = Configuration.GetSection("Services").GetValue<string>("Identity");
-                o.Audience = "sdx.finances.salesOrders.api";
-                o.RequireHttpsMetadata = false;
-                o.TokenValidationParameters = new TokenValidationParameters()
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    ValidateAudience = false,
-                    ValidateIssuer = false
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["JWT:ValidAudience"],
+                    ValidIssuer = Configuration["JWT:ValidIssuer"],
+                    IssuerSigningKey =
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"]))
                 };
             });
 
@@ -70,11 +74,13 @@ namespace Sdx.Demo.Invoice.API
                 {
                     Title = "Sdx.Demo.Invoice.API",
                     Version = "v1",
-                    Description = $"<p><strong>Build: </strong>{GetType().Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}</p>"
+                    Description =
+                        $"<p><strong>Build: </strong>{GetType().Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}</p>"
                 });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+                    Description =
+                        "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
@@ -94,7 +100,6 @@ namespace Sdx.Demo.Invoice.API
                             Scheme = "oauth2",
                             Name = "Bearer",
                             In = ParameterLocation.Header,
-
                         },
                         new List<string>()
                     }
@@ -125,10 +130,7 @@ namespace Sdx.Demo.Invoice.API
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
