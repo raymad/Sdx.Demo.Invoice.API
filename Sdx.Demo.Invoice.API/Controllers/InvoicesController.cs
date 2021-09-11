@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Sdx.Demo.Invoice.Application.Domain.Invoice.Commands;
 using Sdx.Demo.Invoice.Application.Domain.Invoice.Queries;
 using Sdx.Demo.Invoice.Application.Dtos;
 using Sdx.Demo.Invoice.Application.ViewModels;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Sdx.Demo.Invoice.API.Controllers
 {
@@ -26,6 +28,8 @@ namespace Sdx.Demo.Invoice.API.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(Summary = "Retorna un listado de facturas",
+            Description = "Retorna un listado de facturas", OperationId = "GET")]
         public async Task<ActionResult<IEnumerable<InvoiceViewModel>>> GetAll()
         {
             var invoices = await _mediator.Send(new GetAllInvoicesQuery());
@@ -33,6 +37,8 @@ namespace Sdx.Demo.Invoice.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Retorna una factura",
+            Description = "Retorna una factura por un identificador", OperationId = "GET")]
         public async Task<ActionResult<InvoiceViewModel>> Get(int id)
         {
             var invoice = await _mediator.Send(new GetInvoiceQuery()
@@ -43,6 +49,8 @@ namespace Sdx.Demo.Invoice.API.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(Summary = "Crear una factura",
+            Description = "Crear una factura", OperationId = "POST")]
         public async Task<ActionResult<InvoiceViewModel>> Create(InvoiceDto invoiceDto)
         {
             var invoice = await _mediator.Send(new AddInvoiceCommand()
