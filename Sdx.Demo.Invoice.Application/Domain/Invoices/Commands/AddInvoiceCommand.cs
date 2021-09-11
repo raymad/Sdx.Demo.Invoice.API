@@ -7,7 +7,7 @@ using Sdx.Demo.Invoice.Application.Dtos;
 using Sdx.Demo.Invoice.Application.Interfaces;
 using Sdx.Demo.Invoice.Application.ViewModels;
 
-namespace Sdx.Demo.Invoice.Application.Domain.Invoice.Commands
+namespace Sdx.Demo.Invoice.Application.Domain.Invoices.Commands
 {
     public class AddInvoiceCommand : IRequest<InvoiceViewModel>
     {
@@ -30,7 +30,7 @@ namespace Sdx.Demo.Invoice.Application.Domain.Invoice.Commands
 
             public async Task<InvoiceViewModel> Handle(AddInvoiceCommand request, CancellationToken cancellationToken)
             {
-                var invoice = _mapper.Map<Demo.Invoice.Domain.Entities.Invoice>(request.Invoice);
+                var invoice = _mapper.Map<Invoice.Domain.Entities.Invoice>(request.Invoice);
                 await _dbContext.Invoices.AddAsync(invoice, cancellationToken);
                 await _integrationEventService.SaveContextChangesAsync();
 

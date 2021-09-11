@@ -6,13 +6,13 @@ namespace Sdx.Demo.Invoice.Domain.Entities
 {
     public abstract class BaseEntity : IEntity
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        private BaseEntity()
+        public BaseEntity()
         {
         }
 
-        protected BaseEntity(int id)
+        public BaseEntity(int id)
         {
             Id = id;
         }

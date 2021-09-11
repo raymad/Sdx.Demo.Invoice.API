@@ -10,6 +10,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Sdx.Demo.Invoice.Infrastructure.Persistence;
+using AutoMapper.Configuration;
+using Sdx.Demo.Invoice.Web.HttpClient;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace Sdx.Demo.Invoice.Web
 {
@@ -28,6 +31,16 @@ namespace Sdx.Demo.Invoice.Web
             services.AddRazorPages();
 
             services.AddInfrastructure(Configuration);
+
+            services.AddHttpClient<ILoginHttpClient, LoginHttpClient>(c =>
+            {
+                c.BaseAddress = new Uri(Configuration.GetValue<string>("Service"));
+            });
+
+            services.AddHttpClient<IInvoiceHttpClient, InvoiceHttpClient>(c =>
+            {
+                c.BaseAddress = new Uri(Configuration.GetValue<string>("Service"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

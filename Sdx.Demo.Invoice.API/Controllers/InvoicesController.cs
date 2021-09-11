@@ -6,8 +6,8 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
-using Sdx.Demo.Invoice.Application.Domain.Invoice.Commands;
-using Sdx.Demo.Invoice.Application.Domain.Invoice.Queries;
+using Sdx.Demo.Invoice.Application.Domain.Invoices.Commands;
+using Sdx.Demo.Invoice.Application.Domain.Invoices.Queries;
 using Sdx.Demo.Invoice.Application.Dtos;
 using Sdx.Demo.Invoice.Application.ViewModels;
 using Swashbuckle.AspNetCore.Annotations;
@@ -17,7 +17,7 @@ namespace Sdx.Demo.Invoice.API.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class InvoicesController : ControllerBase
     {
         private readonly IMediator _mediator;

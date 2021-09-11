@@ -9,21 +9,20 @@ namespace Sdx.Demo.Invoice.Domain.Entities
         /// <summary>
         /// Producto
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
 
         /// <summary>
         /// Relacion con Factura
         /// </summary>
-        public int InvoiceId { get; private set; }
-        public Invoice Invoice { get; private set; }
+        public int InvoiceId { get; set; }
+        public Invoice Invoice { get; set; }
 
-        public Product(int id, string name) : base(id)
+        public Product()
         {
-            Name = name;
         }
 
-        public void SetName(string name)
+        public Product(int id, string name) : base(id)
         {
             Name = name;
         }

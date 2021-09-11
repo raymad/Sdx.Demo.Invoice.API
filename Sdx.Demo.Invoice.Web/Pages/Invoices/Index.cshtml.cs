@@ -7,23 +7,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Sdx.Demo.Invoice.Domain.Entities;
 using Sdx.Demo.Invoice.Infrastructure.Persistence.Context;
+using Sdx.Demo.Invoice.Web.HttpClient;
+using Sdx.Demo.Invoice.Web.Models;
 
 namespace Sdx.Demo.Invoice.Web.Pages.Invoices
 {
     public class IndexModel : PageModel
     {
+        private readonly IInvoiceHttpClient _client;
         private readonly ApplicationDbContext _context;
 
-        public IndexModel(ApplicationDbContext context)
+        public IndexModel(IInvoiceHttpClient client, ApplicationDbContext context)
         {
+            _client = client;
             _context = context;
         }
 
-        public IList<Domain.Entities.Invoice> Invoice { get;set; }
+        public IList<InvoiceModel> Invoice { get;set; }
 
         public async Task OnGetAsync()
         {
-            Invoice = await _context.Invoices.ToListAsync();
+            Invoice = await _client.GetInvoices();
         }
     }
 }

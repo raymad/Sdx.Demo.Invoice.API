@@ -5,13 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Sdx.Demo.Invoice.Web.HttpClient;
 
 namespace Sdx.Demo.Invoice.Web.Pages.Login
 {
     public class IndexModel : PageModel
     {
-        public IndexModel()
+        private readonly ILoginHttpClient _client;
+
+        public IndexModel(ILoginHttpClient client)
         {
+            _client = client;
         }
 
         public IActionResult OnGet()
@@ -31,6 +35,8 @@ namespace Sdx.Demo.Invoice.Web.Pages.Login
             }
 
             Console.WriteLine($"{UserModel.UserName} - {UserModel.Password}");
+            var token = await _client.GetToken(UserModel);
+            Console.WriteLine(token);
             return Redirect("Invoices");
         }
     }

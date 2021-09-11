@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,7 +8,7 @@ using Sdx.Demo.Invoice.Application.Exceptions;
 using Sdx.Demo.Invoice.Application.Interfaces;
 using Sdx.Demo.Invoice.Application.ViewModels;
 
-namespace Sdx.Demo.Invoice.Application.Domain.Invoice.Queries
+namespace Sdx.Demo.Invoice.Application.Domain.Invoices.Queries
 {
     public class GetInvoiceQuery : IRequest<InvoiceViewModel>
     {
