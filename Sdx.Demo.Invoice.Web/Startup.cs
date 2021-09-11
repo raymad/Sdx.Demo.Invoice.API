@@ -1,16 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Sdx.Demo.Invoice.Infrastructure.Persistence;
-using AutoMapper.Configuration;
 using Sdx.Demo.Invoice.Web.HttpClient;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
@@ -29,8 +22,6 @@ namespace Sdx.Demo.Invoice.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-
-            services.AddInfrastructure(Configuration);
 
             services.AddHttpClient<ILoginHttpClient, LoginHttpClient>(c =>
             {

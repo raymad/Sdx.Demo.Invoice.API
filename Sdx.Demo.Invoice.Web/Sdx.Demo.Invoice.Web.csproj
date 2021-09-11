@@ -24,10 +24,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Sdx.Demo.Invoice.Application\Sdx.Demo.Invoice.Application.csproj" />
-    <ProjectReference Include="..\Sdx.Demo.Invoice.Domain\Sdx.Demo.Invoice.Domain.csproj" />
-    <ProjectReference Include="..\Sdx.Demo.Invoice.Infrastructure\Sdx.Demo.Invoice.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Sdx.Demo.Invoice.Domain.Entities;
-using Sdx.Demo.Invoice.Infrastructure.Persistence.Context;
+using Sdx.Demo.Invoice.Web.HttpClient;
+using Sdx.Demo.Invoice.Web.Models;
 
 namespace Sdx.Demo.Invoice.Web.Pages.Invoices
 {
     public class DeleteModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IInvoiceHttpClient _client;
 
-        public DeleteModel(ApplicationDbContext context)
+        public DeleteModel(IInvoiceHttpClient client)
         {
-            _context = context;
+            _client = client;
         }
 
         [BindProperty]
-        public Domain.Entities.Invoice Invoice { get; set; }
+        public InvoiceModel Invoice { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,7 +29,7 @@ namespace Sdx.Demo.Invoice.Web.Pages.Invoices
                 return NotFound();
             }
 
-            Invoice = await _context.Invoices.FirstOrDefaultAsync(m => m.Id == id);
+            Invoice = await _client.GetInvoice(id);
 
             if (Invoice == null)
             {
@@ -45,12 +45,11 @@ namespace Sdx.Demo.Invoice.Web.Pages.Invoices
                 return NotFound();
             }
 
-            Invoice = await _context.Invoices.FindAsync(id);
+            Invoice = await _client.GetInvoice(id);
 
             if (Invoice != null)
             {
-                _context.Invoices.Remove(Invoice);
-                await _context.SaveChangesAsync();
+                await _client.RemoveInvoice(id);
             }
 
             return RedirectToPage("./Index");

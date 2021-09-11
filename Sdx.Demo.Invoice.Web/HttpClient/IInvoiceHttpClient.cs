@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Sdx.Demo.Invoice.Web.Models;
 
 namespace Sdx.Demo.Invoice.Web.HttpClient
@@ -15,6 +13,8 @@ namespace Sdx.Demo.Invoice.Web.HttpClient
         Task<IList<InvoiceModel>> GetInvoices();
         Task<InvoiceModel> GetInvoice(int? id);
         Task<InvoiceModel> CreateInvoice(InvoiceModel invoice);
+        Task<InvoiceModel> UpdateInvoice(InvoiceModel invoice);
+        Task RemoveInvoice(int? id);
 
     }
 
@@ -68,6 +68,33 @@ namespace Sdx.Demo.Invoice.Web.HttpClient
             }
 
             throw new Exception($"Error Creating Invoice. {response.ReasonPhrase} | {content}");
+        }
+
+        public async Task<InvoiceModel> UpdateInvoice(InvoiceModel invoice)
+        {
+            var stringContent = GetObject(invoice);
+
+            var response = await _client.PostAsync($"{BaseUrl}/{invoice.Id}", stringContent);
+
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return CreateObject<InvoiceModel>(content);
+            }
+
+            throw new Exception($"Error Updating Invoice. {response.ReasonPhrase} | {content}");
+        }
+
+        public async Task RemoveInvoice(int? id)
+        {
+            var response = await _client.DeleteAsync($"{BaseUrl}/{id}");
+
+            var content = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Error Updating Invoice. {response.ReasonPhrase} | {content}");
+            }
+            
         }
 
         private StringContent GetObject(object obj)
