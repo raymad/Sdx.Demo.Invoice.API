@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdx.Demo.Invoice.API", "Sdx.Demo.Invoice.API\Sdx.Demo.Invoice.API.csproj", "{BD800626-B6DB-4E1E-B9BD-FACBA5043E7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdx.Demo.Invoice.API", "Sdx.Demo.Invoice.API\Sdx.Demo.Invoice.API.csproj", "{BD800626-B6DB-4E1E-B9BD-FACBA5043E7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdx.Demo.Invoice.Domain", "Sdx.Demo.Invoice.Domain\Sdx.Demo.Invoice.Domain.csproj", "{61DB0014-5F24-4F9E-9D02-00CFA641A3E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdx.Demo.Invoice.Domain", "Sdx.Demo.Invoice.Domain\Sdx.Demo.Invoice.Domain.csproj", "{61DB0014-5F24-4F9E-9D02-00CFA641A3E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdx.Demo.Invoice.Application", "Sdx.Demo.Invoice.Application\Sdx.Demo.Invoice.Application.csproj", "{832632EC-4096-453A-8576-B5E363F197FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdx.Demo.Invoice.Application", "Sdx.Demo.Invoice.Application\Sdx.Demo.Invoice.Application.csproj", "{832632EC-4096-453A-8576-B5E363F197FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdx.Demo.Invoice.Infrastructure", "Sdx.Demo.Invoice.Infrastructure\Sdx.Demo.Invoice.Infrastructure.csproj", "{E9503410-73B8-4B25-804D-BA46DA89E223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdx.Demo.Invoice.Infrastructure", "Sdx.Demo.Invoice.Infrastructure\Sdx.Demo.Invoice.Infrastructure.csproj", "{E9503410-73B8-4B25-804D-BA46DA89E223}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdx.Demo.Invoice.Web", "Sdx.Demo.Invoice.Web\Sdx.Demo.Invoice.Web.csproj", "{5C95B115-45D1-4BDB-B7D8-A74AF51566FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E9503410-73B8-4B25-804D-BA46DA89E223}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9503410-73B8-4B25-804D-BA46DA89E223}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9503410-73B8-4B25-804D-BA46DA89E223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C95B115-45D1-4BDB-B7D8-A74AF51566FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C95B115-45D1-4BDB-B7D8-A74AF51566FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C95B115-45D1-4BDB-B7D8-A74AF51566FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C95B115-45D1-4BDB-B7D8-A74AF51566FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

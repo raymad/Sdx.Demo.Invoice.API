@@ -1,0 +1,85 @@
+﻿@page
+@model Sdx.Demo.Invoice.Web.Pages.Invoices.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Invoice</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Invoice.Number" class="control-label"></label>
+                <input asp-for="Invoice.Number" class="form-control" />
+                <span asp-validation-for="Invoice.Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.Date" class="control-label"></label>
+                <input asp-for="Invoice.Date" class="form-control" />
+                <span asp-validation-for="Invoice.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.PaymentType" class="control-label"></label>
+                <input asp-for="Invoice.PaymentType" class="form-control" />
+                <span asp-validation-for="Invoice.PaymentType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.ClientDocument" class="control-label"></label>
+                <input asp-for="Invoice.ClientDocument" class="form-control" />
+                <span asp-validation-for="Invoice.ClientDocument" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.ClientName" class="control-label"></label>
+                <input asp-for="Invoice.ClientName" class="form-control" />
+                <span asp-validation-for="Invoice.ClientName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.SubTotal" class="control-label"></label>
+                <input asp-for="Invoice.SubTotal" class="form-control" />
+                <span asp-validation-for="Invoice.SubTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.Discount" class="control-label"></label>
+                <input asp-for="Invoice.Discount" class="form-control" />
+                <span asp-validation-for="Invoice.Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.Iva" class="control-label"></label>
+                <input asp-for="Invoice.Iva" class="form-control" />
+                <span asp-validation-for="Invoice.Iva" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.TotalDiscount" class="control-label"></label>
+                <input asp-for="Invoice.TotalDiscount" class="form-control" />
+                <span asp-validation-for="Invoice.TotalDiscount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.TotalTax" class="control-label"></label>
+                <input asp-for="Invoice.TotalTax" class="form-control" />
+                <span asp-validation-for="Invoice.TotalTax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.Total" class="control-label"></label>
+                <input asp-for="Invoice.Total" class="form-control" />
+                <span asp-validation-for="Invoice.Total" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Invoice.Id" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
