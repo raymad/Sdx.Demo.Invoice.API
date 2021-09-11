@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Sdx.Demo.Invoice.Domain.Entities;
-using Sdx.Demo.Invoice.Web.Data;
+using Sdx.Demo.Invoice.Infrastructure.Persistence.Context;
+using Sdx.Demo.Invoice.Web.Models;
 
 namespace Sdx.Demo.Invoice.Web.Pages.Invoices
 {
     public class CreateModel : PageModel
     {
-        private readonly Sdx.Demo.Invoice.Web.Data.SdxDemoInvoiceWebContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public CreateModel(Sdx.Demo.Invoice.Web.Data.SdxDemoInvoiceWebContext context)
+        public CreateModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -25,7 +26,7 @@ namespace Sdx.Demo.Invoice.Web.Pages.Invoices
         }
 
         [BindProperty]
-        public Domain.Entities.Invoice Invoice { get; set; }
+        public InvoiceModel Invoice { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -35,8 +36,9 @@ namespace Sdx.Demo.Invoice.Web.Pages.Invoices
                 return Page();
             }
 
-            _context.Invoice.Add(Invoice);
-            await _context.SaveChangesAsync();
+            //_context.Invoices.Add(Invoice);
+            //await _context.SaveChangesAsync();
+            Console.WriteLine($"{Invoice.ClientDocument}");
 
             return RedirectToPage("./Index");
         }

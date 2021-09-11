@@ -6,15 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Sdx.Demo.Invoice.Domain.Entities;
-using Sdx.Demo.Invoice.Web.Data;
+using Sdx.Demo.Invoice.Infrastructure.Persistence.Context;
 
 namespace Sdx.Demo.Invoice.Web.Pages.Invoices
 {
     public class DeleteModel : PageModel
     {
-        private readonly Sdx.Demo.Invoice.Web.Data.SdxDemoInvoiceWebContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DeleteModel(Sdx.Demo.Invoice.Web.Data.SdxDemoInvoiceWebContext context)
+        public DeleteModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -29,7 +29,7 @@ namespace Sdx.Demo.Invoice.Web.Pages.Invoices
                 return NotFound();
             }
 
-            Invoice = await _context.Invoice.FirstOrDefaultAsync(m => m.Id == id);
+            Invoice = await _context.Invoices.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Invoice == null)
             {
@@ -45,11 +45,11 @@ namespace Sdx.Demo.Invoice.Web.Pages.Invoices
                 return NotFound();
             }
 
-            Invoice = await _context.Invoice.FindAsync(id);
+            Invoice = await _context.Invoices.FindAsync(id);
 
             if (Invoice != null)
             {
-                _context.Invoice.Remove(Invoice);
+                _context.Invoices.Remove(Invoice);
                 await _context.SaveChangesAsync();
             }
 

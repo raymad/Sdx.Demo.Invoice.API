@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Sdx.Demo.Invoice.Web.Data;
+using Sdx.Demo.Invoice.Infrastructure.Persistence;
 
 namespace Sdx.Demo.Invoice.Web
 {
@@ -27,8 +27,7 @@ namespace Sdx.Demo.Invoice.Web
         {
             services.AddRazorPages();
 
-            services.AddDbContext<SdxDemoInvoiceWebContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("SdxDemoInvoiceWebContext")));
+            services.AddInfrastructure(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
