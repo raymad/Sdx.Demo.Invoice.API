@@ -7,6 +7,8 @@ using MediatR;
 using Sdx.Demo.Invoice.Application.Domain.Login.Commands;
 using Sdx.Demo.Invoice.Application.Dtos;
 using Serilog;
+using Microsoft.CodeAnalysis;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Sdx.Demo.Invoice.API.Controllers
 {
@@ -23,6 +25,8 @@ namespace Sdx.Demo.Invoice.API.Controllers
 
         [HttpPost]
         [Route("login")]
+        [SwaggerOperation(Summary = "Registrarse",
+            Description = "Registrarse y obtener un token válido", OperationId = "POST")]
 
         public async Task<IActionResult> Login([FromBody] LoginDto login)
         {
