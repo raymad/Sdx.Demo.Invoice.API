@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Sdx.Demo.Invoice.Web.Models;
+using Sdx.Demo.Invoice.Web.Services;
 
 namespace Sdx.Demo.Invoice.Web.HttpClient
 {
@@ -18,11 +19,13 @@ namespace Sdx.Demo.Invoice.Web.HttpClient
     public class LoginHttpClient : ILoginHttpClient
     {
         private readonly System.Net.Http.HttpClient _client;
+        private readonly ITokenService _tokenService;
         private const string BaseUrl = "api/Authenticate/login";
 
-        public LoginHttpClient(System.Net.Http.HttpClient client)
+        public LoginHttpClient(System.Net.Http.HttpClient client, ITokenService tokenService)
         {
             _client = client;
+            _tokenService = tokenService;
         }
 
         public async Task<string> GetToken(UserModel userModel)
@@ -34,7 +37,8 @@ namespace Sdx.Demo.Invoice.Web.HttpClient
             var content = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadAsStringAsync();
+                _tokenService.Token = content;
+                return content;
             }
 
             throw new Exception($"Error Login. {response.ReasonPhrase} | {content}");

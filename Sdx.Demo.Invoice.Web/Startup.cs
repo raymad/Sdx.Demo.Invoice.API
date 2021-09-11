@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using Sdx.Demo.Invoice.Web.HttpClient;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
+using Sdx.Demo.Invoice.Web.Services;
 
 namespace Sdx.Demo.Invoice.Web
 {
@@ -22,6 +23,8 @@ namespace Sdx.Demo.Invoice.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            services.AddSingleton<ITokenService, TokenService>();
 
             services.AddHttpClient<ILoginHttpClient, LoginHttpClient>(c =>
             {

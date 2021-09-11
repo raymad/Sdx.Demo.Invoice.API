@@ -4,7 +4,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Sdx.Demo.Invoice.Web.Models;
+using Sdx.Demo.Invoice.Web.Services;
 
 namespace Sdx.Demo.Invoice.Web.HttpClient
 {
@@ -23,9 +25,11 @@ namespace Sdx.Demo.Invoice.Web.HttpClient
         private readonly System.Net.Http.HttpClient _client;
         private const string BaseUrl = "api/Invoices";
 
-        public InvoiceHttpClient(System.Net.Http.HttpClient client)
+        public InvoiceHttpClient(System.Net.Http.HttpClient client, ITokenService tokenService)
         {
             _client = client;
+            _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenService.Token}");
+            
         }
 
         public async Task<IList<InvoiceModel>> GetInvoices()
