@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis;
 using Sdx.Demo.Invoice.Application.Domain.Invoices.Commands;
 using Sdx.Demo.Invoice.Application.Domain.Invoices.Queries;
 using Sdx.Demo.Invoice.Application.Dtos;
@@ -58,6 +55,31 @@ namespace Sdx.Demo.Invoice.API.Controllers
                 Invoice = invoiceDto
             });
             return Ok(invoice);
+        }
+
+        [HttpPost("{id}")]
+        [SwaggerOperation(Summary = "Actualizar una factura",
+            Description = "Actualizar una factura", OperationId = "POST")]
+        public async Task<ActionResult<InvoiceViewModel>> Update(int id, InvoiceDto invoiceDto)
+        {
+            var invoice = await _mediator.Send(new UpdateInvoiceCommand()
+            {
+                Id = id,
+                Invoice = invoiceDto
+            });
+            return Ok(invoice);
+        }
+
+        [HttpDelete("{id}")]
+        [SwaggerOperation(Summary = "Eliminar una factura",
+            Description = "Eliminar una factura", OperationId = "DELETE")]
+        public async Task<ActionResult> Remove(int id)
+        {
+            await _mediator.Send(new RemoveInvoiceCommand()
+            {
+                Id = id
+            });
+            return Ok();
         }
 
 
